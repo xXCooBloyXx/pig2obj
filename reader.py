@@ -6,15 +6,13 @@ import numpy as np
 
 choice = 1
 if choice == 1:
-	filepath = "C:\\Users\\xXCoo\\Downloads\\MinionRush\\files\\models\\*.pig"
-else:
-	filepath = "C:\\Users\\xXCoo\\Downloads\\MinionRush\\pigEditor\\*.pig"
+	filepath = "./*.pig"
 
 for filename in glob.glob(filepath):
 	print(f"Converting {os.path.basename(filename)}...")
 	filenamestr = os.path.basename(filename).split('.')[-2]
-	file = open(f"./objs/{filenamestr}.obj", "w")
-	filemtl = open(f"./objs/{filenamestr}.mtl", "w")
+	file = open(f"./{filenamestr}.obj", "w")
+	filemtl = open(f"./{filenamestr}.mtl", "w")
 	try:
 		file.write(f"mtllib {filenamestr}.mtl\n")
 		
