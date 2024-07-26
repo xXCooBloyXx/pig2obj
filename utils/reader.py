@@ -56,7 +56,31 @@ class Reader:
 		return self.stream.read(length).decode("UTF8")
 	
 	def readString(self):
+		length = self.readUInt8()
+		if length != 255:
+			return self.readChar(length)
+		return None
+	
+	def readUTF(self):
 		return self.readChar(self.readUInt16())
+
+	def readByteUTF(self):
+		return self.readChar(self.readUByte())
+
+	def readARGB(self):
+		return [self.readUByte(), self.readUByte(), self.readUByte(), self.readUByte()]
+
+	def readUniform(self):
+		if self.readByte() == 1:
+			return self.readUTF()
+		else:
+			return self.readARGB()
+	
+	def readMatrix(self):
+		matrix = []
+		for i in range(16):
+			matrix.append(self.readFloat32())
+		return matrix
 	
 	readByte = readInt8
 	readUByte = readUInt8
